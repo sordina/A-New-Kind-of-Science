@@ -26,11 +26,25 @@ run name f width height alignment = do
   createWindow $ name ++ "1D Finite Automata -- "
 
   -- Initialize window state
-  let renderer = renderLoop width height pixels
+  let
+    renderer = renderLoop width height pixels
 
-  displayCallback    $= renderer
-  idleCallback       $= Just renderer
-  initialDisplayMode $= [DoubleBuffered]
+    pause _ Down _ _ = do
+      keyboardMouseCallback $= Just resume
+      idleCallback          $= Nothing
+
+    pause _ _ _ _ = return ()
+
+    resume _ Down _ _ = do
+      keyboardMouseCallback $= Just pause
+      idleCallback          $= Just renderer
+
+    resume _ _ _ _ = return ()
+
+  displayCallback       $= renderer
+  idleCallback          $= Just renderer
+  keyboardMouseCallback $= Just pause
+  initialDisplayMode    $= [DoubleBuffered]
 
   -- Begin OpenGL loop
   mainLoop

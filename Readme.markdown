@@ -32,8 +32,14 @@ It is equivilant to the first example.
     main = runFromString "t  t   t"
 
 
-After this, all that is needed is to compile and run the resulting program.
-This should yield a scrolling OpenGL window
+After this, all that is needed is to compile and run the program.
+This should yield a scrolling OpenGL window.
+
+
+Running
+-------
+
+* Push any key to pause and resume scrolling
 
 
 Known Bugs:
