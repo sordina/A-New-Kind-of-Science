@@ -1,7 +1,7 @@
 import Prelude hiding (Left,Right)
 import OneDSimple
 
-main = run progression 200 700 Center
+main = run progression 200 700 Left
 
 progression (False, False, False) = True
 progression (False, False, True)  = False
