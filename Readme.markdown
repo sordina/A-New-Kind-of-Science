@@ -9,7 +9,7 @@ Example
     import Prelude hiding (Left,Right)
     import OneDSimple
 
-    main = run progression 200 700 Center
+    main = run "Window Name" progression 200 700 Center
 
     progression (False, False, False) = True
     progression (False, False, True)  = False

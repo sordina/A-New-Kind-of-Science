@@ -1,4 +1,4 @@
-module Utility (fromString, runFromString)
+module Utility (fromString, runFromString, run)
 where
 
 import OneDSimple

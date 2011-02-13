@@ -25,22 +25,17 @@ run name f width height alignment = do
   -- Create window
   createWindow $ name ++ "1D Finite Automata -- "
 
-  -- Initialize window state
+  -- Define callbacks
   let
     renderer = renderLoop width height pixels
 
-    pause _ Down _ _ = do
-      keyboardMouseCallback $= Just resume
-      idleCallback          $= Nothing
+    pause _ Down _ _ = keyboardMouseCallback $= Just resume >> idleCallback $= Nothing
+    pause _ _    _ _ = return ()
 
-    pause _ _ _ _ = return ()
+    resume _ Down _ _ = keyboardMouseCallback $= Just pause >> idleCallback $= Just renderer
+    resume _ _    _ _ = return ()
 
-    resume _ Down _ _ = do
-      keyboardMouseCallback $= Just pause
-      idleCallback          $= Just renderer
-
-    resume _ _ _ _ = return ()
-
+  -- Initialize window state
   displayCallback       $= renderer
   idleCallback          $= Just renderer
   keyboardMouseCallback $= Just pause
