@@ -10,8 +10,8 @@ import Data.IORef
 data Alignment = Left | Center | Right
 
 -- Main entry function
-run :: ((Bool,Bool,Bool) -> Bool) -> Int -> Int -> Alignment -> IO ()
-run f width height alignment = do
+run :: String -> ((Bool,Bool,Bool) -> Bool) -> Int -> Int -> Alignment -> IO ()
+run name f width height alignment = do
 
   -- Set up references
   pixels <- newIORef (mkAutomata f (mkRow alignment width))
@@ -21,7 +21,7 @@ run f width height alignment = do
   initialWindowSize  $= Size (fromIntegral width) (fromIntegral height)
 
   -- Create window
-  createWindow "1D Finite Automata"
+  createWindow $ "1D Finite Automata -- " ++ name
 
   -- Initialize window state
   let renderer = renderLoop width height pixels
