@@ -1,0 +1,7 @@
+*.hi
+*.o
+*.swp
+*.prof
+rule*
+!rule*.hs
+hugsin
