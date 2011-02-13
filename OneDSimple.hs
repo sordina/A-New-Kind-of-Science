@@ -1,4 +1,4 @@
-module OneDSimple (run, mkAutomata, Alignment(..))
+module OneDSimple (run, mkAutomata, Successor, Alignment(..))
 where
 
 import Prelude hiding (Left, Right) -- Left, Right collide with allignments
@@ -9,8 +9,10 @@ import Data.IORef
 -- Data Types
 data Alignment = Left | Center | Right
 
+type Successor = (Bool,Bool,Bool) -> Bool
+
 -- Main entry function
-run :: String -> ((Bool,Bool,Bool) -> Bool) -> Int -> Int -> Alignment -> IO ()
+run :: String -> Successor -> Int -> Int -> Alignment -> IO ()
 run name f width height alignment = do
 
   -- Set up references
@@ -21,7 +23,7 @@ run name f width height alignment = do
   initialWindowSize  $= Size (fromIntegral width) (fromIntegral height)
 
   -- Create window
-  createWindow $ "1D Finite Automata -- " ++ name
+  createWindow $ name ++ "1D Finite Automata -- "
 
   -- Initialize window state
   let renderer = renderLoop width height pixels
@@ -80,7 +82,7 @@ cyclePixels height ioPixels = do
 triplify l = zip3      (tail (cycle l))       l       (False : l)
 
 mkRow Left   width = True : replicate (width-1) False
-mkRow Center width = replicate w False ++ [True] ++ replicate w False where w = (width`div`2)
+mkRow Center width = replicate w False ++ [True] ++ replicate w False where w = width `div` 2
 mkRow Right  width = replicate (width-1) False ++ [True]
 
 mkAutomata f = iterate (map f . triplify)

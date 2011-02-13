@@ -3,8 +3,8 @@ Worked Examples from Wolfram's "A New Kind of Science"
 
 A playful attempt at reproducing the 'rules' from ANKoS in Haskell and OpenGL.
 
-Example:
---------
+Example
+-------
 
     import Prelude hiding (Left,Right)
     import OneDSimple
@@ -19,6 +19,17 @@ Example:
     progression (True,  False, True)  = False
     progression (True,  True,  False) = False
     progression (True,  True,  True)  = True
+
+Shortened Example
+-----------------
+
+The following example uses the shortcut notation for defining rules.
+It is equivilant to the first example.
+
+
+    import Utility
+
+    main = runFromString "t  t   t"
 
 
 After this, all that is needed is to compile and run the resulting program.

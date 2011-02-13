@@ -1,7 +1,7 @@
 import Prelude hiding (Left,Right)
 import OneDSimple
 
-main = run "ANKoS - Rule 30" progression 200 700 Center
+main = run "ANKoS - Rule 30" progression 500 700 Center
 
 progression (False, False, False) = True
 progression (False, False, True)  = True
