@@ -32,6 +32,21 @@ It is equivilant to the first example.
     main = runFromString "t  t   t"
 
 
+Indexed Rules
+-------------
+
+The following example uses an index to access a given rule.
+
+Note: These indexes are not equivilant to Wolfram's rule numbers.
+The indexes progres from 'ffffffff' to 'tttttttt' in binary counting fashion with
+'f' representing 0, and 't' representing 1.
+
+
+    import Utility
+
+    main = runFromIndex 89
+
+
 After this, all that is needed is to compile and run the program.
 This should yield a scrolling OpenGL window.
 
