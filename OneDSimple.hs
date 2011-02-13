@@ -21,9 +21,10 @@ run name f width height alignment = do
   -- Initialize GL state
   getArgsAndInitialize
   initialWindowSize  $= Size (fromIntegral width) (fromIntegral height)
+  initialDisplayMode $= [DoubleBuffered]
 
   -- Create window
-  createWindow $ name ++ "1D Finite Automata -- "
+  createWindow $ name ++ " -- Finite Automata"
 
   -- Define callbacks
   let
@@ -39,7 +40,6 @@ run name f width height alignment = do
   displayCallback       $= renderer
   idleCallback          $= Just renderer
   keyboardMouseCallback $= Just pause
-  initialDisplayMode    $= [DoubleBuffered]
 
   -- Begin OpenGL loop
   mainLoop
@@ -52,9 +52,6 @@ renderLoop width height ioPixels = do
   flushAfter
 
   where
-    w = fi width
-    h = fi height
-
     renderRows :: [[Bool]] -> IO ()
     renderRows rows = renderPrimitive Points $ mapM_ renderRow indexedRows
       where
@@ -68,10 +65,13 @@ renderLoop width height ioPixels = do
         indexedCells = zip (up (-width`div`2)) row
 
         renderCell :: (Int,Bool) -> IO ()
-        renderCell (x,c) = mkColor c >> v (2*fi x/w) (2*fi y/h)
+        renderCell (x,c) = mkColor c >> v (2*fi x/fi width) (2*fi y/fi height)
 
-mkColor True  = color $ Color3 0 0 (0::GLdouble)
-mkColor False = color $ Color3 1 0 (0::GLdouble)
+mkColor True  = colorTrue
+mkColor False = colorFalse
+
+colorTrue  = color $ Color3 0.7  0.8  (0.9::GLdouble)
+colorFalse = color $ Color3 0.04 0.05 (0.06::GLdouble)
 
 v :: GLdouble -> GLdouble -> IO ()
 v a b = vertex $ Vertex2 a b
@@ -103,8 +103,8 @@ flushBefore = do
   pointSize $= 1
 
 flushAfter = do
-  flush
   swapBuffers
+  -- flush
 
 fi = fromIntegral
 

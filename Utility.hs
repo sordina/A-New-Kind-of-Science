@@ -1,4 +1,4 @@
-module Utility (fromIndex, runFromIndex, fromString, runFromString, run)
+module Utility (fromIndex, runFromIndex, fromString, runFromString, run, Alignment(..))
 where
 
 import OneDSimple
