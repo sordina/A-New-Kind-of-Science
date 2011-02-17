@@ -6,4 +6,4 @@ import OneDSimple
 --                       ftftftft
 -- main = runFromString "t t  t t"
 
-main = run "Rule 90" (fromString "t t  t t") 1400 700 Center
+main = run "Rule 90" (fromString "tftfftft") 1400 700 Center

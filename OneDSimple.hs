@@ -1,4 +1,4 @@
-module OneDSimple (run, mkAutomata, Successor, Alignment(..))
+module OneDSimple (run, mkAutomata, mkRow, Successor, Alignment(..))
 where
 
 import Prelude hiding (Left, Right) -- Left, Right collide with allignments
@@ -26,6 +26,9 @@ run name f width height alignment = do
   -- Create window
   createWindow $ name ++ " -- Finite Automata"
 
+  -- pointSmooth $= Enabled
+  pointSize $= 1
+
   -- Define callbacks
   let
     renderer = renderLoop width height pixels
@@ -47,7 +50,7 @@ run name f width height alignment = do
 renderLoop :: Int -> Int -> IORef [[Bool]] -> IO ()
 renderLoop width height ioPixels = do
   pixels <- cyclePixels height ioPixels -- Main pixel-cycling logic
-  flushBefore
+  -- flushBefore
   renderRows pixels -- Main drawing logic
   flushAfter
 
@@ -98,9 +101,7 @@ mkAutomata f = iterate (map f . triplify)
 
 -- Convenience Stuff
 
-flushBefore = do
-  clear [ColorBuffer]
-  pointSize $= 1
+--flushBefore = do --clear [ColorBuffer] -- pointSize $= 1
 
 flushAfter = do
   swapBuffers

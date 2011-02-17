@@ -2,6 +2,9 @@
 *.o
 *.swp
 *.prof
+*.png
+*.pbm
+renderAll
 rule*
 !rule*.hs
 hugsin
