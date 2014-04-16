@@ -2,7 +2,6 @@ module OneDSimple (run, mkAutomata, mkRow, Successor, Alignment(..))
 where
 
 import Prelude hiding (Left, Right) -- Left, Right collide with allignments
-import Graphics.Rendering.OpenGL
 import Graphics.UI.GLUT
 import Data.IORef
 
